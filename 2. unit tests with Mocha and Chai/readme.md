@@ -1,4 +1,4 @@
-# 1. Create simple frontend and backend
+# 2. Unit tests with Mocha and Chai
 Shows how to run unit tests.
 
 ## Setup
