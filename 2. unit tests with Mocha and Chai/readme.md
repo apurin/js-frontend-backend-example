@@ -4,7 +4,7 @@ Shows how to run unit tests.
 ## Setup
 This step requires "Initial setup" from root folder's `readme.md` to be done and sources from "1. simple frontend and backend" folder.
 
-### Creating a Node.JS module
+## Creating a Node.JS module
 We don't have any code to test yet, let's add some. Create `my-module.js`:
 ```
 module.exports = {
@@ -23,7 +23,7 @@ As you can see we have sync `square(n)` and async `waitOneSecond(callback)` func
 
 N.B. - using `setTimeout()` method is not recomended and it is here only to demonstrate testing of async functions.  
 
-### Using our Node.JS module
+## Using our Node.JS module
 To use our own module we need to import it via `require()` Node.JS method. Add following code to `service.js`:
 ```
 var myModule = require('./my-module.js');
@@ -36,7 +36,7 @@ myModule.waitOneSecond(function() {
 ```
 Run your service to see output.
 
-### Unit testing by Mocha and Chai
+## Unit testing by Mocha and Chai
 [Mocha](https://mochajs.org) is a test framework which allows to test sync and async code, and [Chai](http://chaijs.com/api/assert/) is an assertion library.
 
 Let's create `tests/my-module-tests.js`:
@@ -95,7 +95,7 @@ And update `package.json` by adding new modules to [devdependencies](https://doc
 ```
 Now open _View -> Integrated terminal_ again and run `npm install` to install new dependencies and `npm run-script test` to actually run tests.
 
-### Debug Mocha tests in VSCode
+## Debug Mocha tests in VSCode
 Now you can test your code, but it would be good to be able to debug it in case of issues. Open `.vscode/launch.json` and add following configuration:
 ```
 {

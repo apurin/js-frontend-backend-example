@@ -7,18 +7,20 @@ Every next step is based on results of previous, so you could either see end res
 
 Steps are:
 
-1. simple frontend and backend
+1. Simple frontend and backend
     - HTML and Stylesheet
     - Express HTTP service
     - NPM package's entry point and dependencies
     - Run and debug Node.JS service in the VSCode
-2. unit tests with Mocha and Chai
+2. Unit tests with Mocha and Chai
     - Creating a Node.JS module
     - Using our Node.JS module
     - Unit testing by Mocha and Chai
     - Debug Mocha tests in VSCode
-3. using modules the browser with Browserify
-    - Work in progress
+3. Browserify modules
+    - Create client side code
+    - Build client side with Browserify and Watchify
+    - Debug frontend code in the browser
 
 ## Initial setup
 Perform these steps to make initial setup of your work environment:

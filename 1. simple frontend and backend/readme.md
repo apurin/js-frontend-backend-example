@@ -1,4 +1,4 @@
-# 1. Create simple frontend and backend
+# 1. Simple frontend and backend
 Shows how to setup Node.JS HTTP service and serve your own static HTML page. 
 
 ## Setup
@@ -14,7 +14,7 @@ Now you should have `package.json` file, which defines your project. It will be 
 
 Now we need a simple HTTP server, which would listen to HTTP requests and return some static files.
 
-### HTML and Stylesheet
+## HTML and Stylesheet
 Create `static` folder, which will contain static resources.
 
 Create `static/index.html` file, it'll be our main page. Add following content:
@@ -40,7 +40,7 @@ body {
 ```
 Open `static/index.html` file in any browser and you should see black background and white text `Hello world!`.
 
-### Express HTTP service
+## Express HTTP service
 Create `service.js` file, it'll be our service. Add following content:
 ```
 var express = require('express');
@@ -55,7 +55,7 @@ app.listen(5000, function () {
 
 We're using [express framework](https://expressjs.com/) to run our HTTP service.
 
-### NPM package's entry point and dependencies
+## NPM package's entry point and dependencies
 Now we have a page to show and service to run, so we need to configure our `project.json` to include `express` module as dependency and point to `service.js` as our main script:
 ```
 {
@@ -75,7 +75,7 @@ Now we have a page to show and service to run, so we need to configure our `proj
 ```
 Also we need to install newly added dependency. Open VSCode's terminal again and run `npm install` command.
 
-### Run and debug Node.JS service in the VSCode
+## Run and debug Node.JS service in the VSCode
 Select `service.js` file in VSCode and press `F5` and choose `Node.js` environment to create `.vscode/launch.json` configuration file, which allows to run and debug our Node.JS service inside VSCode.
 We don't need `Attach` and `Attach to Proccess` configurations for this manual so you can delete them.
 
