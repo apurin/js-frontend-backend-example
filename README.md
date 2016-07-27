@@ -5,7 +5,7 @@ This manual consists of several steps. Each step is stored in a separate folder 
 
 Every next step is based on results of previous, so you could either see end result or move along every step with your own project.
 
-Steps are:
+Contents are:
 
 1. Simple frontend and backend
     - HTML and Stylesheet
@@ -21,9 +21,12 @@ Steps are:
     - Create client side code
     - Build client side with Browserify and Watchify
     - Debug frontend code in the browser
+4. Dynamic pages and Socket.IO
+    - Dynamic page
+    - Communication between frontend and backend
 
 ## Initial setup
 Perform these steps to make initial setup of your work environment:
  1. Install [VSCode](https://code.visualstudio.com)
  2. Install [Node.js](https://nodejs.org), it comes with [NPM](https://docs.npmjs.com/) package manager
- 3. Open folder with a step you're interested in the VSCode (it should have `.vscode` subfolder in it) 
+ 3. Open a folder with a step you're interested in the VSCode (it should have `.vscode` subfolder in it) 

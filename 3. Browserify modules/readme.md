@@ -67,9 +67,20 @@ Notice new dependencies, devDependencies and new scripts. Script `build` will pa
 As we added new dependencies we need to install them. Run `npm install` in the _View -> Integrated terminal_.
 
 Now we can invoke browserify: `npm run-script build`.
-Start backend service (Open _View -> Debug_, choose "Launch" in dropdown menu and press `F5`) and open [http://localhost:5000](http://localhost:5000) to see that jQuery now works in the browser.
+Start backend service (Open _View -> Debug_, choose "Launch" in the dropdown menu and press `F5`) and open [http://localhost:5000](http://localhost:5000) to see that jQuery now works in the browser.
 
 To avoid manual rebundling every time `index.js` changed we can run `npm run-script watch`. Watchify will watch for any changes saved to `index.js` and instantly bundle them to `static/bundle.js`.
 To stop watchify just press `Ctrl + C` in the terminal window.
 
 ## Debug frontend code in the browser
+To debug frontend code you need to simply use develope's console. 
+
+In Chrome press `F12` and choose "Sources" tab. You will see following tree:
+ - localhost:5000
+   - (index)
+   - bundle.js
+   - index.css
+
+Click on `bundle.js` and you will see your code in the begining of file. Put breakpoint on `$('body').append('<br />Updated by jQuery!');` line and refresh page.
+
+If you have Watchify running you can edit `main.js` and instantly see changes in browser by refreshing the page.

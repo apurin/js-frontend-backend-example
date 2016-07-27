@@ -1,0 +1,25 @@
+{
+  "name": "javascript-example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "service.js",
+  "scripts": {
+    "build": "browserify index.js > static/bundle.js",
+    "watch": "watchify index.js -o static/bundle.js",
+    "test": "mocha tests/*-tests.js"
+  },
+  "dependencies": {
+    "browserify": "*",
+    "express": "*",
+    "jquery": "*",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "watchify": "*"
+  },
+  "author": "Anton Purin",
+  "license": "MIT"
+}
