@@ -36,4 +36,4 @@ If you simply want to run the existing code do the following after the initial s
  1. Open section's folder in the VSCode
  2. Open _View -> Integrated Terminal_ and run `npm install` command to install all required dependencies
  3. Open _View -> Debug_, choose `Launch` in combobox and press `F5` to run backend service
- 4. Open [http://localhost:5000/](http://localhost:5000/) page to see client side (also dynamic page [http://localhost:5000/about](http://localhost:5000/about) is available in section 4)
+ 4. Open [http://localhost:5000/](http://localhost:5000/) page to see client side (also [http://localhost:5000/about](http://localhost:5000/about) in section 4)
