@@ -1,14 +1,22 @@
 {
-  "name": "javascript-example",
-  "version": "0.0.0",
-  "description": "",
+  "name": "js-example",
+  "version": "1.0.0",
+  "description": "An example of JS frontend & backend",
   "main": "service.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": { 
-    "express": "*" 
-  },
   "author": "Anton Purin",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anpur/js-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anpur/js-example/issues"
+  },
+  "homepage": "https://github.com/anpur/js-example"
 }

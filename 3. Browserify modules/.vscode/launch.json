@@ -22,15 +22,15 @@
             "outDir": null
         },
         {
-			"name": "Run Mocha tests",
-			"type": "node",
+            "name": "Run Mocha tests",
+            "type": "node",
             "request": "launch",
-			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-			"stopOnEntry": false,
-			"args": ["tests/*-tests.js"],
-			"cwd": "${workspaceRoot}",
-			"runtimeExecutable": null,
-			"env": { "NODE_ENV": "development"}
-		}
+            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "stopOnEntry": false,
+            "args": ["tests/*-tests.js"],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": { "NODE_ENV": "development"}
+        }
     ]
 }

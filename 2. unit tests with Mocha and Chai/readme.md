@@ -26,9 +26,10 @@ N.B. - using `setTimeout()` method is not recomended and it is here only to demo
 ## Using our Node.JS module
 To use our own module we need to import it via `require()` Node.JS method. Add following code to `service.js`:
 ```
+// === Importing module on server side ===
 var myModule = require('./my-module.js');
-console.log('Square of 5 is ' + myModule.square(5));
 
+console.log('Square of 5 is ' + myModule.square(5));
 console.log('Waiting one second');
 myModule.waitOneSecond(function() {
   console.log('Waiting is over');
@@ -44,7 +45,7 @@ Let's create `tests/my-module-tests.js`:
 var myModule = require('../my-module.js');
 var assert = require("chai").assert;
 
-describe("square", function () {
+describe("square", function () {    
     it("below zero", function () {        
         assert.equal(1, myModule.square(-1));
         assert.equal(4, myModule.square(-2));
@@ -72,28 +73,19 @@ describe("waitOneSecond", function () {
 Notice that to test asyncronious functions like `waitOneSecond` we just need to define the `done` argument in our test function and then call it when test is done (no pun intended). 
 Also we can define test's timeout by calling `timeout(milliseconds)` to the result of `it(...)` invocation.
 
-And update `package.json` by adding new modules to [devdependencies](https://docs.npmjs.com/files/package.json#devdependencies) and defining `test` scipt to use our mocha tests:
+Both Mocha and Chai are needed only for tests, so we can install them as [devdependencies](https://docs.npmjs.com/files/package.json#devdependencies) via `--save-dev` flag. 
+
+Open _View -> Integrated terminal_ again and run these two commands:
 ```
-{
-  "name": "javascript-example",
-  "version": "0.0.0",
-  "description": "",
-  "main": "service.js",
-  "scripts": {
-    "test": "mocha tests/*-tests.js"
-  },
-  "dependencies": { 
-    "express": "*" 
-  },
-  "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
-  },
-  "author": "Anton Purin",
-  "license": "MIT"
-}
+npm install --save-dev mocha
+npm install --save-dev chai
 ```
-Now open _View -> Integrated terminal_ again and run `npm install` to install new dependencies and `npm run-script test` to actually run tests.
+
+Now we also need to update `test` script in `package.json`:
+```
+"test": "mocha tests/*-tests.js"
+```
+so we can run it via `npm test` command.
 
 ## Debug Mocha tests in VSCode
 Now you can test your code, but it would be good to be able to debug it in case of issues. Open `.vscode/launch.json` and add following configuration:

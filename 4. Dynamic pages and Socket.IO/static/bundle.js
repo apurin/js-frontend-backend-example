@@ -1,15 +1,23 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// === Import NPM jQuery module on the client side === 
 $ = require('jquery');
-var io = require('socket.io-client').connect('http://localhost:5000');
 
 $( document ).ready(function() {
-    $('body').append('<br />Updated by jQuery!');    
+    $('body').append('<br />Updated by jQuery!');
+});
 
+// === Comunication with server over Socket.IO
+// Create connection
+var io = require('socket.io-client').connect();
+
+$( document ).ready(function() {
+    // Send whatever we have in text box on button click
     $('#button-send').click(function() {
         var userText = $('#input-user').val();
         io.emit('user message', userText);
     });
 
+    // Update output div on server message
     io.on('server message', function (data) {
         $('#div-server-message').html(data);
     });

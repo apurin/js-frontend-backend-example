@@ -7,104 +7,73 @@ This step requires "Initial setup" from root folder's `readme.md` to be done and
 ## Dynamic page
 So far our HTTP service only hosted static documents, like `index.html`, etc. Now we will add dynamic page, which will tell backend version to user.
 
-Update `service.js` script:
+Add following code to `service.js`:
 ```
-var express = require('express');
-var app = express();
+// === Dynamic page ===
+// Load our package definition as object
 var packageInfo = require('./package.json');
 
-app.use(express.static(__dirname + '/static')); // maps app contents of /static folder to http://localhost:5000
-
+// Generate dynamic page on GET request
 app.get('/about.html', function(req, res) {
   var currentTime = new Date().toLocaleTimeString();
   res.send("<strong>" + packageInfo.name + "</strong><br />version: " + packageInfo.version + "<br />License: " + packageInfo.license + "<br />Backend local time: " + currentTime);
-});
-
-app.listen(5000, function () {
-  console.log('Example JS service is listening on http://localhost:5000');
-});
-
-var myModule = require('./my-module.js');
-console.log('Square of 5 is ' + myModule.square(5));
-
-console.log('Waiting one second');
-myModule.waitOneSecond(function() {
-  console.log('Waiting is over');
 });
 ```
 Run service and open [http://localhost:5000/about.html](http://localhost:5000/about.html) to see generated message. Refresh it few times to ensure that message is dynamically generated each time you're requesting the address.
 
 ## Communication between frontend and backend
-Add "socket.io" to dependencies and run `npm install` to install it.
+Socket.IO has two flawors `socket.io` for Node.JS side and `socket.io-client` for the browser.
+Install them both:
+```
+npm install --save socket.io
+npm install --save socket.io-client
+```
 
-Add an input and button to `static/index.html`:
+Add input text box, button and div for output to the `static/index.html` after `Hello world!`:
 ```
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Example JS service</title>
-    <link rel="stylesheet" type="text/css" href="index.css"/>
-</head>
-<body>
-    Hello world!
-    <div>
-        <input id="input-user" value="write your message here"></input>
-        <button id="button-send">Send to server</button><br />
-        <div id="div-server-message">Server's response will appear here</div>
-    </div>
-    <script src="bundle.js"></script>      
-</body>
-</html>
+<div>
+  <input id="input-user" value="write your message here"></input>
+  <button id="button-send">Send to server</button><br />
+  <div id="div-server-message">Server's response will appear here</div>
+</div>
 ```
 
 Add handlers to frontend's code in `index.js`:
 ```
-$ = require('jquery');
-var io = require('socket.io-client').connect('http://localhost:5000');
+// === Communication with server over Socket.IO
+// Create connection
+var io = require('socket.io-client').connect();
 
 $( document ).ready(function() {
-    $('body').append('<br />Updated by jQuery!');    
-
+    // Send whatever we have in text box on button click
     $('#button-send').click(function() {
         var userText = $('#input-user').val();
         io.emit('user message', userText);
     });
 
+    // Update output div on server message
     io.on('server message', function (data) {
         $('#div-server-message').html(data);
     });
 });
 ```
+Don't forget to bundle client code via `npm run-script build`.
 
-And to backend code in `service.js`:
+Add backend code to `service.js`:
 ```
-var express = require('express');
-var app = express();
-var packageInfo = require('./package.json');
-var server = require('http').createServer(app);
+// === Communication with frontend via Socket.IO ===
 var io = require('socket.io')(server);
-server.listen(5000, function () {
-  console.log('Server listening');
-});
 
-io.on('connection', function(socket){
-  socket.on('user message', function (data) {
-    socket.emit('server message', "Server recieved following data: <em>" + data + "</em>")
+// When client connects
+io.on('connection', function(client){
+  console.log("client connected: " + client.conn.remoteAddress);
+  // Add handler for that client
+  client.on('user message', function (data) {
+    client.emit('server message', "Server received following data: <em>" + data + "</em>")
   });
 });
-
-app.use(express.static(__dirname + '/static')); // maps app contents of /static folder to http://localhost:5000
-
-app.get('/about.html', function(req, res) {
-  var currentTime = new Date().toLocaleTimeString();
-  res.send("<strong>" + packageInfo.name + "</strong><br />version: " + packageInfo.version + "<br />License: " + packageInfo.license + "<br />Backend local time: " + currentTime);
-});
-
-var myModule = require('./my-module.js');
-console.log('Square of 5 is ' + myModule.square(5));
-console.log('Waiting one second');
-myModule.waitOneSecond(function() {
-  console.log('Waiting is over');
-});
 ```
+It uses `server` instance of HTTP server, we're already using for `express`.
+
+Start backend now (_View -> Debug_, choose `Launch` from combobox and press `F5`) and open [http://localhost:5000/](http://localhost:5000/).

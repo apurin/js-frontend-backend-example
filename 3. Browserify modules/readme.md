@@ -7,6 +7,7 @@ This step requires "Initial setup" from root folder's `readme.md` to be done and
 ## Create client side code
 Create `index.js` file:
 ```
+// === Import NPM jQuery module on the client side === 
 $ = require('jquery');
 
 $( document ).ready(function() {
@@ -26,45 +27,32 @@ Browser can't use this script, so we need to import `static/bundle.js` in our `s
 </head>
 <body>
     Hello world!
-    <script src="bundle.js"></script>      
+    <script src="bundle.js"></script>    
 </body>
 </html>
 ```
 Notice that `static` folder serves as root for our HTTP service, so `static/bundle.js` will be available as `<host>/bundle.js`.
-This is why it is imported simply as `src="bundle.js"`.
+This is why it is imported as `src="bundle.js"`.
 
 ## Build client side with Browserify and Watchify
 Now we need to add `jQuery` and `Browserify` to package's dependencies and add script which will generate client side JS code.
 Also, we will add `Watchify` to devdependencies to simplify frontend development.
 
-Update `package.json`:
+Run following commands in terminal:
 ```
-{
-  "name": "javascript-example",
-  "version": "0.0.0",
-  "description": "",
-  "main": "service.js",
-  "scripts": {
-    "build": "browserify index.js > static/bundle.js",
-    "watch": "watchify index.js -o static/bundle.js",
-    "test": "mocha tests/*-tests.js"
-  },
-  "dependencies": { 
-    "express": "*",
-    "browserify": "*",
-    "jquery": "*"
-  },
-  "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "watchify": "*"
-  },
-  "author": "Anton Purin",
-  "license": "MIT"
-}
+npm install --save jquery
+npm install --save browserify
+npm install --save-dev watchify
+```
+And add following scripts to `package.json` along with `test` script we had:
+```
+"scripts": {
+  "build": "browserify index.js > static/bundle.js",
+  "watch": "watchify index.js -o static/bundle.js",
+  "test": "mocha tests/*-tests.js"
+},
 ```
 Notice new dependencies, devDependencies and new scripts. Script `build` will pack our `index.js` and all it's dependencies to browser friendly `static/bundle.js` file.
-As we added new dependencies we need to install them. Run `npm install` in the _View -> Integrated terminal_.
 
 Now we can invoke browserify: `npm run-script build`.
 Start backend service (Open _View -> Debug_, choose "Launch" in the dropdown menu and press `F5`) and open [http://localhost:5000](http://localhost:5000) to see that jQuery now works in the browser.
@@ -83,4 +71,4 @@ In Chrome press `F12` and choose "Sources" tab. You will see following tree:
 
 Click on `bundle.js` and you will see your code in the begining of file. Put breakpoint on `$('body').append('<br />Updated by jQuery!');` line and refresh page.
 
-If you have Watchify running you can edit `main.js` and instantly see changes in browser by refreshing the page.
+If you have Watchify running you can edit `main.js` and instantly see changes in the browser by refreshing the page.

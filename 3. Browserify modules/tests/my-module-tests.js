@@ -1,7 +1,7 @@
 var myModule = require('../my-module.js');
 var assert = require("chai").assert;
 
-describe("square", function () {
+describe("square", function () {    
     it("below zero", function () {        
         assert.equal(1, myModule.square(-1));
         assert.equal(4, myModule.square(-2));
