@@ -6,7 +6,7 @@ $( document ).ready(function() {
     $('body').append('<br />Updated by jQuery!');
 });
 
-// === Comunication with server over Socket.IO
+// === Communication with server over Socket.IO
 // Create connection
 var io = require('socket.io-client').connect();
 

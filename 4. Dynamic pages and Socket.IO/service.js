@@ -21,7 +21,7 @@ myModule.waitOneSecond(function() {
 });
 
 // === Dynamic page ===
-// Load our package definition as object
+// Load our package definition as an object
 var packageInfo = require('./package.json');
 
 // Generate dynamic page on GET request

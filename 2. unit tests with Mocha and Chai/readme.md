@@ -1,8 +1,7 @@
 # 2. Unit tests with Mocha and Chai
-Shows how to run unit tests.
+This section shows how to define Node.JS module and define unit tests.
 
-## Setup
-This step requires "Initial setup" from root folder's `readme.md` to be done and sources from "1. simple frontend and backend" folder.
+It requires _Initial setup_ to be done and the sources from "1. Simple frontend and backend" folder.
 
 ## Creating a Node.JS module
 We don't have any code to test yet, let's add some. Create `my-module.js`:
@@ -21,10 +20,10 @@ We've created a [Node.JS module](https://nodejs.org/api/modules.html) by assigni
 
 As you can see we have sync `square(n)` and async `waitOneSecond(callback)` functions here.
 
-N.B. - using `setTimeout()` method is not recomended and it is here only to demonstrate testing of async functions.  
+N.B. - using `setTimeout()` method is not recommended and it is here only to demonstrate testing of async functions.  
 
 ## Using our Node.JS module
-To use our own module we need to import it via `require()` Node.JS method. Add following code to `service.js`:
+To use our own module we need to import it via `require()` Node.JS method. Add following code to the `service.js`:
 ```
 // === Importing module on server side ===
 var myModule = require('./my-module.js');
@@ -70,8 +69,8 @@ describe("waitOneSecond", function () {
     }).timeout(1200);
 });
 ```
-Notice that to test asyncronious functions like `waitOneSecond` we just need to define the `done` argument in our test function and then call it when test is done (no pun intended). 
-Also we can define test's timeout by calling `timeout(milliseconds)` to the result of `it(...)` invocation.
+To test asynchronous functions like `waitOneSecond` we just need to define a `done` argument in our test function and then call it when test is done (no pun intended). 
+Also we can define test's timeout by calling `timeout(milliseconds)` on the result of `it(...)` invocation.
 
 Both Mocha and Chai are needed only for tests, so we can install them as [devdependencies](https://docs.npmjs.com/files/package.json#devdependencies) via `--save-dev` flag. 
 
@@ -81,14 +80,14 @@ npm install --save-dev mocha
 npm install --save-dev chai
 ```
 
-Now we also need to update `test` script in `package.json`:
+Now we also need to update `test` script in the `package.json`:
 ```
 "test": "mocha tests/*-tests.js"
 ```
-so we can run it via `npm test` command.
+so we can run it with `npm test` command (or `npm run-script test`).
 
-## Debug Mocha tests in VSCode
-Now you can test your code, but it would be good to be able to debug it in case of issues. Open `.vscode/launch.json` and add following configuration:
+## Debug Mocha tests in the VSCode
+Now you can test your code, but it would be good to be able to debug it in the case of issues. Open `.vscode/launch.json` and add following configuration:
 ```
 {
     "name": "Run Mocha tests",

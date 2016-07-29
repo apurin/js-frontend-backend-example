@@ -1,16 +1,15 @@
 # 4. Dynamic pages and Socket.IO
-Now we want to create dynamic page and communicate between frontend and backend via [http://Socket.io/](http://socket.io/).
+This section shows how to create dynamic page and communicate between frontend and backend via [http://Socket.io/](http://socket.io/).
 
-## Setup
-This step requires "Initial setup" from root folder's `readme.md` to be done and sources from "3. Browserify modules" folder.
+It requires _Initial setup_ to be done and the sources from "3. Browserify modules" folder.
 
 ## Dynamic page
-So far our HTTP service only hosted static documents, like `index.html`, etc. Now we will add dynamic page, which will tell backend version to user.
+So far our HTTP service hosted only static documents, like `index.html`, etc. Now we will add dynamic page.
 
 Add following code to `service.js`:
 ```
 // === Dynamic page ===
-// Load our package definition as object
+// Load our package definition as an object
 var packageInfo = require('./package.json');
 
 // Generate dynamic page on GET request
@@ -19,19 +18,20 @@ app.get('/about.html', function(req, res) {
   res.send("<strong>" + packageInfo.name + "</strong><br />version: " + packageInfo.version + "<br />License: " + packageInfo.license + "<br />Backend local time: " + currentTime);
 });
 ```
-Run service and open [http://localhost:5000/about.html](http://localhost:5000/about.html) to see generated message. Refresh it few times to ensure that message is dynamically generated each time you're requesting the address.
+Start service and open [http://localhost:5000/about.html](http://localhost:5000/about.html) to see generated message. 
+Refresh it few times to see that message is dynamically generated each time you're requesting the address.
+You can also put a breakpoint to `var currentTime = new Date().toLocaleTimeString();` line to catch request on backend side.
 
-## Communication between frontend and backend
-Socket.IO has two flawors `socket.io` for Node.JS side and `socket.io-client` for the browser.
+## Communication between the frontend and the backend
+Socket.IO has two flavors `socket.io` for Node.JS side and `socket.io-client` for the the browser side.
 Install them both:
 ```
 npm install --save socket.io
 npm install --save socket.io-client
 ```
 
-Add input text box, button and div for output to the `static/index.html` after `Hello world!`:
+Add an input text box, a button and a div for output to the `static/index.html` after `Hello world!` line:
 ```
-<!doctype html>
 <div>
   <input id="input-user" value="write your message here"></input>
   <button id="button-send">Send to server</button><br />
@@ -39,7 +39,7 @@ Add input text box, button and div for output to the `static/index.html` after `
 </div>
 ```
 
-Add handlers to frontend's code in `index.js`:
+Add handlers to the frontend's code in `index.js`:
 ```
 // === Communication with server over Socket.IO
 // Create connection
@@ -58,9 +58,9 @@ $( document ).ready(function() {
     });
 });
 ```
-Don't forget to bundle client code via `npm run-script build`.
+Don't forget to bundle client code via `npm run-script build` command.
 
-Add backend code to `service.js`:
+Add backend code to the `service.js`:
 ```
 // === Communication with frontend via Socket.IO ===
 var io = require('socket.io')(server);
